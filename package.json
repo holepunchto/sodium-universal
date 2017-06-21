@@ -7,7 +7,9 @@
     "sodium-native": "sodium-javascript"
   },
   "dependencies": {
-    "sodium-javascript": "~0.3.0",
+    "sodium-javascript": "~0.3.0"
+  },
+  "optionalDependencies": {
     "sodium-native": "^1.8.0"
   },
   "scripts": {},
