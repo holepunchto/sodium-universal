@@ -1,11 +1,21 @@
 var exec = require('child_process').execSync
 var path = require('path')
+var os = require('os')
+var fs = require('fs')
 
-var symbols = exec(`nm -gU "${path.join(require.resolve('sodium-native'), '../prebuilds/darwin-x64/libsodium.dylib')}"`).toString().trim().split('\n')
-var native = new Set(Object.keys(require('sodium-native')).sort())
-var js = new Set(Object.keys(require('sodium-javascript')).sort())
+const parentDirectory = path.join(require.resolve('sodium-native'), `../prebuilds/${os.platform()}-${os.arch()}`)
+const fileName = fs.readdirSync(parentDirectory).find((f) => f.startsWith('libsodium'))
+const filePath = path.join(parentDirectory, fileName)
 
-symbols = symbols.map(l => l.split(' ').pop().replace(/^_/, '').replace(/_[^_]*bytes.*/, (s) => s.toUpperCase()))
+var symbols = exec(`nm --dynamic "${filePath}"`).toString().trim().split('\n')
+var native = new Set(Object.keys(require('sodium-native')))
+var js = new Set(Object.keys(require('sodium-javascript')))
+
+symbols = symbols
+  .map((line) => ({ type: line[17], name: line.slice(19)}))
+  .filter(({ type, name }) => ['D', 'T', 'W'].includes(type) && name.startsWith('_') === false)
+  .map(({ name }) => name.replace(/_[^_]*bytes.*/, (s) => s.toUpperCase()))
+  .sort((a, b) => a.toLowerCase() < b.toLowerCase())
 
 var missing = []
 
