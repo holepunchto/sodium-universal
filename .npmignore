@@ -1,3 +1,6 @@
 node_modules
 !/*.js
 !internal/*.js
+*.tgz
+build-scripts
+
