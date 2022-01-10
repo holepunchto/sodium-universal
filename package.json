@@ -21,6 +21,9 @@
   "browser": {
     "sodium-native": "sodium-javascript"
   },
+  "react-native": {
+    "sodium-native": "sodium-react-native"
+  },
   "browserify": {
     "transform": [
       "./build-scripts/transform.js"
