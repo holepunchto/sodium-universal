@@ -19,7 +19,8 @@
     "prepublish": "./build-scripts/generate.js"
   },
   "browser": {
-    "sodium-native": "sodium-javascript"
+    "sodium-native": "sodium-javascript",
+    "worker_threads": false
   },
   "browserify": {
     "transform": [
