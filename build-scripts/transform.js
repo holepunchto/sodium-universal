@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const { Transform, PassThrough } = require('stream')
-const resolve = require('resolve')
 
 module.exports = function (file, opts) {
   const basedir = path.resolve(__dirname, '..')
@@ -16,14 +15,11 @@ module.exports = function (file, opts) {
       cb()
     },
     flush (cb) {
-      const m = 'sodium-javascript/' + relname
-      resolve(m, { basedir }, (err, file) => {
+      const filename = require.resolve('sodium-javascript/' + relname)
+      fs.readFile(filename, (err, buf) => {
         if (err) return cb(err)
-        fs.readFile(file, (err, buf) => {
-          if (err) return cb(err)
-          this.push(buf)
-          cb(null)
-        })
+        this.push(buf)
+        cb(null)
       })
     }
   })
