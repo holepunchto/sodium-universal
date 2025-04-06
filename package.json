@@ -1,6 +1,6 @@
 {
   "name": "sodium-universal",
-  "version": "5.0.0",
+  "version": "4.0.1",
   "description": "Universal wrapper for sodium-javascript and sodium-native working in Node.js and the Browser",
   "main": "index.js",
   "dependencies": {
