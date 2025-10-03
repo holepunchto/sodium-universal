@@ -15,6 +15,8 @@
     }
   },
   "scripts": {
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
     "prepublish": "./build-scripts/generate.js"
   },
   "browser": {
@@ -45,5 +47,9 @@
   "bugs": {
     "url": "https://github.com/holepunchto/sodium-universal/issues"
   },
-  "homepage": "https://github.com/holepunchto/sodium-universal#readme"
+  "homepage": "https://github.com/holepunchto/sodium-universal#readme",
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-config-holepunch": "^1.0.0"
+  }
 }
