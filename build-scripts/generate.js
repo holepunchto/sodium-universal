@@ -6,7 +6,7 @@ const root = path.dirname(require.resolve('sodium-javascript/package.json'))
 
 const tmp = "module.exports = require('sodium-native')\n"
 
-function recurse (dir) {
+function recurse(dir) {
   const ls = fs.readdirSync(dir)
   const subdir = path.relative(root, dir)
   if (subdir) fs.mkdirSync(subdir, { recursive: true })
@@ -30,4 +30,7 @@ for (const key of Object.keys(pkg.dependencies)) {
   myPkg.dependencies[key] = pkg.dependencies[key]
 }
 
-fs.writeFileSync(path.join(__dirname, '../package.json'), JSON.stringify(myPkg, null, 2) + '\n')
+fs.writeFileSync(
+  path.join(__dirname, '../package.json'),
+  JSON.stringify(myPkg, null, 2) + '\n'
+)

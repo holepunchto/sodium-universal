@@ -11,10 +11,10 @@ module.exports = function (file, opts) {
   }
 
   return new Transform({
-    transform (data, enc, cb) {
+    transform(data, enc, cb) {
       cb()
     },
-    flush (cb) {
+    flush(cb) {
       const filename = require.resolve('sodium-javascript/' + relname)
       fs.readFile(filename, (err, buf) => {
         if (err) return cb(err)
