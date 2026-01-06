@@ -31,21 +31,19 @@ const max = symbols
   .map((s) => s.length)
   .reduce((a, b) => Math.max(a, b))
 const lines = ':-' + ''.padEnd(max, '--') + '-:'
-const center = (s) =>
-  s.padStart(Math.floor((max + s.length) / 2), ' ').padEnd(max, ' ')
+const center = (s) => s.padStart(Math.floor((max + s.length) / 2), ' ').padEnd(max, ' ')
 
-console.log(
-  `|  ${center('C Library Symbol')}  |   \`sodium-native\`    | \`sodium-javascript\`  |`
-)
+console.log(`|  ${center('C Library Symbol')}  |   \`sodium-native\`    | \`sodium-javascript\`  |`)
 console.log(`|${lines}|:--------------------:|:--------------------:|`)
 
 for (var i = 0; i < symbols.length; i++) {
   var s = symbols[i]
   if (!(native.has(s) || js.has(s))) missing.push(s)
-  else
+  else {
     console.log(
       `| \`${(s + '`').padEnd(max + 1, ' ')} | ${native.has(s) ? ' :white_check_mark: ' : ':small_red_triangle:'} | ${js.has(s) ? ' :white_check_mark: ' : ':small_red_triangle:'} |`
     )
+  }
 }
 
 console.log('\n### Missing altogether (Ctrl + F friendly)\n')

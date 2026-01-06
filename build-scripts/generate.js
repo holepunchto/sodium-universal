@@ -30,7 +30,4 @@ for (const key of Object.keys(pkg.dependencies)) {
   myPkg.dependencies[key] = pkg.dependencies[key]
 }
 
-fs.writeFileSync(
-  path.join(__dirname, '../package.json'),
-  JSON.stringify(myPkg, null, 2) + '\n'
-)
+fs.writeFileSync(path.join(__dirname, '../package.json'), JSON.stringify(myPkg, null, 2) + '\n')
